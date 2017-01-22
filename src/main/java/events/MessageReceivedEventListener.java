@@ -1,4 +1,4 @@
-package Events;
+package events;
 
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
