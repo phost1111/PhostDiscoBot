@@ -24,11 +24,14 @@ public class MessageReceivedEventListener {
         if(message.getContent().startsWith("!zeit") || message.getContent().startsWith("!time")){
             modules.MessageResponder.respond("" + ZonedDateTime.now().getHour() + ":" + ZonedDateTime.now().getMinute(), event);
         }
-        if(message.getContent().startsWith("!invlink") || message.getContent().startsWith("!invitelink")){
+        if(message.getContent().equals("!invlink") || message.getContent().equals("!invitelink")){
             modules.MessageResponder.respond("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=0x00000008", event);
         }
         if(message.getContent().startsWith("!koala")){
             modules.MessageResponder.respond("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", event);
+        }
+        if(message.getContent().equals("!invlinktesting") || message.getContent().equals("!invitelinktesting")){
+            modules.MessageResponder.respond("https://discordapp.com/oauth2/authorize?&client_id=222058371996581890&scope=bot&permissions=0x00000008", event);
         }
     }
 
