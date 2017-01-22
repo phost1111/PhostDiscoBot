@@ -30,7 +30,7 @@ public class ReadyEventListener {
             System.out.println(channels.get(i - 1).getName());
             if (channels.get(i - 1).getName().equals("general")) {
                 if(!ClientManager.getDeveloperMode())
-                    MessageSender.sendMessage("Bot online! V. " + ClientManager.Version, channels.get(i - 1));
+                    MessageSender.sendMessage("Bot online! V." + ClientManager.Version, channels.get(i - 1));
             }
         }
     }
