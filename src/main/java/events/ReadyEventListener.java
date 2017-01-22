@@ -1,7 +1,7 @@
 package events;
 
 import client.ClientManager;
-import modules.MessageSender;
+import utils.MessageSender;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.handle.obj.IChannel;

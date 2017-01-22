@@ -1,4 +1,4 @@
-package modules;
+package utils;
 
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.util.DiscordException;
