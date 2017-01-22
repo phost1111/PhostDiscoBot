@@ -14,7 +14,7 @@ public class main {
     public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
-        ClientManager.setDeveloperMode(true);
+        ClientManager.setDeveloperMode(false);
         System.out.println("Please enter your bot Token");
         ClientManager.newClientInstance(scanner.next(), true);
         ClientManager.newDispatcher();
