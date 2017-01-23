@@ -32,6 +32,9 @@ public class Commands {
     public static void koalaCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
+    public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        MessageSender.sendMessage("```HELP\n!botworking\n!time / !zeit\n!date / !datum\n!invlink / !invitelink\n!invlinktesting / !invitelinktesting\n!koala\n```", channel);
+    }
 
 
 }

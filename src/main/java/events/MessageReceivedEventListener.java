@@ -36,6 +36,9 @@ public class MessageReceivedEventListener {
         if(message.getContent().equals("!datum") || message.getContent().equals("!date")){
             Commands.dateCommand(message.getChannel());
         }
+        if(message.getContent().equals("!help")){
+            Commands.helpCommand(message.getChannel());
+        }
 
     }
 
