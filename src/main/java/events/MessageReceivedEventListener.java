@@ -1,5 +1,6 @@
 package events;
 
+import modules.Commands;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IMessage;
@@ -18,24 +19,24 @@ public class MessageReceivedEventListener {
     public void onMessageReceivedEvent(MessageReceivedEvent event) throws RateLimitException, DiscordException, MissingPermissionsException {
         IMessage message = event.getMessage();
         if(message.getContent().startsWith("!botworking")){
-            utils.MessageResponder.respond("Bot working!", event);
-            System.out.println("" + event.getMessage().getChannel().getID() + " " + event.getMessage().getChannel().getName());
+            Commands.botWorkingCommand(message.getChannel());
         }
         if(message.getContent().startsWith("!zeit") || message.getContent().startsWith("!time")){
-            utils.MessageResponder.respond("" + ZonedDateTime.now().getHour() + ":" + ZonedDateTime.now().getMinute(), event);
+            Commands.timeCommand(message.getChannel());
         }
         if(message.getContent().equals("!invlink") || message.getContent().equals("!invitelink")){
-            utils.MessageResponder.respond("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=0x00000008", event);
+            Commands.inviteLinkCommand(message.getChannel());
         }
         if(message.getContent().startsWith("!koala")){
-            utils.MessageResponder.respond("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", event);
+            Commands.koalaCommand(message.getChannel());
         }
         if(message.getContent().equals("!invlinktesting") || message.getContent().equals("!invitelinktesting")){
-            utils.MessageResponder.respond("https://discordapp.com/oauth2/authorize?&client_id=222058371996581890&scope=bot&permissions=0x00000008", event);
+            Commands.inviteLinkTestingCommand(message.getChannel());
         }
         if(message.getContent().equals("!datum") || message.getContent().equals("!date")){
-            utils.MessageResponder.respond("" + ZonedDateTime.now().getDayOfMonth() + "." + ZonedDateTime.now().getMonthValue() + "." + ZonedDateTime.now().getYear(), event);
+            Commands.dateCommand(message.getChannel());
         }
+
     }
 
 
