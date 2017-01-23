@@ -50,7 +50,8 @@ public class Commands {
         MessageSender.sendMessage("" + ZonedDateTime.now(zone).getHour() + ":" + ZonedDateTime.now(zone).getMinute(), channel);
     }
     public static void setTimezoneCommand(IMessage message) throws IOException {
-        FileManager.writeIntoFile(message.getChannel(), "test");
+        String zone = new StringBuilder(message.getContent()).delete(0,13).toString();
+        FileManager.writeIntoFile(message.getChannel(), zone);
     }
 
 

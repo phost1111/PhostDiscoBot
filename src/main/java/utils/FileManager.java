@@ -30,14 +30,14 @@ public class FileManager {
         String temp = null;
         ArrayList<String> lines = new ArrayList<String>();
         while((temp = bufferedReader.readLine()) != null){
-            lines.add(temp);
+            lines.add(0, temp);
         }
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(timeZoneDBFile));
         for(int i = lines.size(); i >= 1; i--){
             bufferedWriter.write(lines.get(i - 1));
             bufferedWriter.newLine();
         }
-        bufferedWriter.write("" + channel.getID() + toWrite);
+        bufferedWriter.write("" + channel.getID() + " " + toWrite);
         bufferedReader.close();
         bufferedWriter.close();
     }

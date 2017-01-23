@@ -46,7 +46,6 @@ public class MessageReceivedEventListener {
             Commands.testCommand(message.getChannel());
         }
         if(message.getContent().startsWith("!settimezone ")){
-            String zone = new StringBuilder(message.getContent()).delete(0,13).toString();
             Commands.setTimezoneCommand(message);
         }
 
