@@ -18,7 +18,10 @@ public class Commands {
         System.out.println("" + channel.getID() + " " + channel.getName());
     }
     public static void timeCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("" + ZonedDateTime.now().getHour() + ":" + ZonedDateTime.now().getMinute(), channel);
+        if(ZonedDateTime.now().getMinute() >= 10)
+            MessageSender.sendMessage("" + ZonedDateTime.now().getHour() + ":" + ZonedDateTime.now().getMinute(), channel);
+        else
+            MessageSender.sendMessage("" + ZonedDateTime.now().getHour() + ":0" + ZonedDateTime.now().getMinute(), channel);
     }
     public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("" + ZonedDateTime.now().getDayOfMonth() + "." + ZonedDateTime.now().getMonthValue() + "." + ZonedDateTime.now().getYear(), channel);
