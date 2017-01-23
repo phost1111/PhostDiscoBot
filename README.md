@@ -1,4 +1,3 @@
-Currently in backlog issues: [![Stories in Backlog](https://badge.waffle.io/phost1111/PhostDiscoBot.png?title=In Backlog)](http://waffle.io/phost1111/PhostDiscoBot)
 Currently ready issues: [![Stories in Ready](https://badge.waffle.io/phost1111/PhostDiscoBot.png?label=ready&title=Ready)](http://waffle.io/phost1111/PhostDiscoBot)
 Currently in progress issues: [![Stories in Progress](https://badge.waffle.io/phost1111/PhostDiscoBot.png?label=in progress&title=In Progress)](http://waffle.io/phost1111/PhostDiscoBot)
 
