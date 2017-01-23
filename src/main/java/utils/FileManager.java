@@ -4,6 +4,7 @@ import sx.blah.discord.handle.obj.IChannel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -14,14 +15,13 @@ import java.util.Scanner;
 public class FileManager {
 
     public static File timeZoneDBFile;
-    public static Formatter formatter;
+    public static FileWriter fileWriter;
 
     public static File getTimeZoneFBFileObject() {
         return timeZoneDBFile;
     }
 
     public static void writeIntoFile(IChannel channel, String toWrite) throws IOException {
-        formatter = null;
         if(timeZoneDBFile == null)
             timeZoneDBFile = new File("timeZoneDB.txt");
         if(!timeZoneDBFile.exists()) {
@@ -35,10 +35,9 @@ public class FileManager {
             fileContent += fileReader.next();
         }
         System.out.println("DateiInhalt: " + fileContent);
-        formatter = new Formatter("timeZoneDB.txt");
-        formatter.format(fileContent);
-        formatter.format("%s\n", toWrite);
-        formatter.close();
+        fileWriter = new FileWriter(timeZoneDBFile);
+        fileWriter.write(fileContent + "\n" + channel.getID() + toWrite);
+        fileWriter.close();
     }
 
 }
