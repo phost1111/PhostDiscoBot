@@ -12,7 +12,7 @@ public class main {
     public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
-        ClientManager.setDeveloperMode(false);   //THIS TELLS THE BOT WETHER HE IS IN DEV MODE OR NOT
+        ClientManager.setDeveloperMode(true);   //THIS TELLS THE BOT WETHER HE IS IN DEV MODE OR NOT
         System.out.println("Please enter your bot Token");
         ClientManager.newClientInstance(scanner.next(), true);
         ClientManager.newDispatcher();
