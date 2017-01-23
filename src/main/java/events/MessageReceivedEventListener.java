@@ -8,7 +8,9 @@ import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
+import utils.MessageSender;
 
+import java.io.IOException;
 import java.time.ZonedDateTime;
 
 /**
@@ -17,12 +19,12 @@ import java.time.ZonedDateTime;
 public class MessageReceivedEventListener {
 
     @EventSubscriber
-    public void onMessageReceivedEvent(MessageReceivedEvent event) throws RateLimitException, DiscordException, MissingPermissionsException {
+    public void onMessageReceivedEvent(MessageReceivedEvent event) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
         IMessage message = event.getMessage();
         if(message.getContent().startsWith("!botworking")){
             Commands.botWorkingCommand(message.getChannel());
         }
-        if(message.getContent().startsWith("!zeit") || message.getContent().startsWith("!time")){
+        if(message.getContent().equals("!zeit") || message.getContent().equals("!time")){
             Commands.timeCommand(message.getChannel());
         }
         if(message.getContent().equals("!invlink") || message.getContent().equals("!invitelink")){
@@ -42,6 +44,10 @@ public class MessageReceivedEventListener {
         }
         if(message.getContent().equals("!testcommand") && ClientManager.getDeveloperMode()){
             Commands.testCommand(message.getChannel());
+        }
+        if(message.getContent().startsWith("!settimezone ")){
+            String zone = new StringBuilder(message.getContent()).delete(0,13).toString();
+            Commands.setTimezoneCommand(message);
         }
 
     }
