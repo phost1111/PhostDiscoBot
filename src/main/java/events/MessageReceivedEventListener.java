@@ -1,5 +1,6 @@
 package events;
 
+import client.ClientManager;
 import modules.Commands;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
@@ -38,6 +39,9 @@ public class MessageReceivedEventListener {
         }
         if(message.getContent().equals("!help")){
             Commands.helpCommand(message.getChannel());
+        }
+        if(message.getContent().equals("!testcommand") && ClientManager.getDeveloperMode()){
+            Commands.testCommand(message.getChannel());
         }
 
     }

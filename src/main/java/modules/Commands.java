@@ -6,7 +6,10 @@ import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
 import utils.MessageSender;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Set;
 
 /**
  * Created by Phost on 22.01.2017.
@@ -38,6 +41,11 @@ public class Commands {
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("```HELP\n!botworking\n!time / !zeit\n!date / !datum\n!invlink / !invitelink\n!invlinktesting / !invitelinktesting\n!koala\n```", channel);
     }
+    public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        ZoneId zone = ZoneId.of("UTC+1");
+        MessageSender.sendMessage("" + ZonedDateTime.now(zone).getHour() + ":" + ZonedDateTime.now(zone).getMinute(), channel);
+    }
+
 
 
 }
