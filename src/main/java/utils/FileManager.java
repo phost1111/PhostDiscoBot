@@ -2,10 +2,8 @@ package utils;
 
 import sx.blah.discord.handle.obj.IChannel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
@@ -28,16 +26,20 @@ public class FileManager {
             timeZoneDBFile.createNewFile();
             System.out.println("New File created!");
         }
-        String fileContent = "";
-        Scanner fileReader = new Scanner(timeZoneDBFile);
-        while(fileReader.hasNext()){
-            System.out.println("has next");
-            fileContent += fileReader.next();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(timeZoneDBFile));
+        String temp = null;
+        ArrayList<String> lines = new ArrayList<String>();
+        while((temp = bufferedReader.readLine()) != null){
+            lines.add(temp);
         }
-        System.out.println("DateiInhalt: " + fileContent);
-        fileWriter = new FileWriter(timeZoneDBFile);
-        fileWriter.write(fileContent + "\n" + channel.getID() + toWrite);
-        fileWriter.close();
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(timeZoneDBFile));
+        for(int i = lines.size(); i >= 1; i--){
+            bufferedWriter.write(lines.get(i - 1));
+            bufferedWriter.newLine();
+        }
+        bufferedWriter.write("" + channel.getID() + toWrite);
+        bufferedReader.close();
+        bufferedWriter.close();
     }
 
 }
