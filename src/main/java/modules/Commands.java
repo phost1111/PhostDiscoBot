@@ -10,10 +10,8 @@ import utils.MessageSender;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Set;
 
 /**
  * Created by Phost on 22.01.2017.
@@ -24,14 +22,14 @@ public class Commands {
         MessageSender.sendMessage("Bot working!", channel);
         System.out.println("" + channel.getID() + " " + channel.getName());
     }
-    public static void timeCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        if(ZonedDateTime.now().getMinute() >= 10)
-            MessageSender.sendMessage("" + ZonedDateTime.now().getHour() + ":" + ZonedDateTime.now().getMinute(), channel);
+    public static void timeCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+        if(ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMinute() >= 10)
+            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getHour() + ":" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMinute(), channel);
         else
-            MessageSender.sendMessage("" + ZonedDateTime.now().getHour() + ":0" + ZonedDateTime.now().getMinute(), channel);
+            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getHour() + ":0" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMinute(), channel);
     }
-    public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("" + ZonedDateTime.now().getDayOfMonth() + "." + ZonedDateTime.now().getMonthValue() + "." + ZonedDateTime.now().getYear(), channel);
+    public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+        MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getYear(), channel);
     }
     public static void inviteLinkCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=0x00000008", channel);
@@ -51,7 +49,7 @@ public class Commands {
     }
     public static void setTimezoneCommand(IMessage message) throws IOException {
         String zone = new StringBuilder(message.getContent()).delete(0,13).toString();
-        FileManager.writeIntoFile(message.getChannel(), zone);
+        FileManager.writeIntoDatabase(message.getGuild(), zone);
     }
 
 
