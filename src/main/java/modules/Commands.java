@@ -23,13 +23,21 @@ public class Commands {
         System.out.println("" + channel.getID() + " " + channel.getName());
     }
     public static void timeCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
-        if(ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMinute() >= 10)
-            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getHour() + ":" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMinute(), channel);
-        else
-            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getHour() + ":0" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMinute(), channel);
+        if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
+            if (ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute() >= 10)
+                MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getHour() + ":" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute(), channel);
+            else
+                MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getHour() + ":0" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute(), channel);
+        }else{
+            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
+        }
     }
     public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
-        MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.searchInDatabase(channel.getGuild()))).getYear(), channel);
+        if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
+            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getYear(), channel);
+        }else{
+            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
+        }
     }
     public static void inviteLinkCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=0x00000008", channel);
@@ -41,7 +49,7 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n!botworking\n!time / !zeit\n!date / !datum\n!invlink / !invitelink\n!invlinktesting / !invitelinktesting\n!koala\n```", channel);
+        MessageSender.sendMessage("```HELP\n!botworking\n!time / !zeit\n!date / !datum\n!settimezone <timeZone>\n!invlink / !invitelink\n!invlinktesting / !invitelinktesting\n!koala\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
