@@ -12,8 +12,10 @@ public class FileManager {
 
     public static File timeZoneDBFile;
 
-    public static void createFileObject(){
+    public static void createFileObject() throws IOException {
         timeZoneDBFile = new File("timeZoneDB.txt");
+        if(!timeZoneDBFile.exists())
+            timeZoneDBFile.createNewFile();
     }
 
     public static void writeIntoDatabase(IGuild guild, String toWrite) throws IOException {

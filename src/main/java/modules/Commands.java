@@ -23,6 +23,8 @@ public class Commands {
         System.out.println("" + channel.getID() + " " + channel.getName());
     }
     public static void timeCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+        if(!FileManager.timeZoneDBFile.exists())
+            FileManager.createFileObject();
         if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
             if (ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute() >= 10)
                 MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getHour() + ":" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute(), channel);
@@ -33,6 +35,8 @@ public class Commands {
         }
     }
     public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+        if(!FileManager.timeZoneDBFile.exists())
+            FileManager.createFileObject();
         if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
             MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getYear(), channel);
         }else{
