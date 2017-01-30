@@ -3,3 +3,5 @@ Currently in progress issues: [![Stories in Progress](https://badge.waffle.io/ph
 
 # PhostDiscoBot
 This is a Discord Bot created by me, Phost https://keybase.io/phost
+It used Discord4J https://github.com/austinv11/Discord4J
+and is planning to use Lavaplayer https://github.com/sedmelluq/lavaplayer
