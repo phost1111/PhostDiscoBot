@@ -8,7 +8,6 @@ import sx.blah.discord.util.RateLimitException;
 import utils.FileManager;
 import utils.MessageSender;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -43,6 +42,15 @@ public class Commands {
             MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
         }
     }
+    public static void weekDayCommand(IChannel channel) throws IOException, RateLimitException, DiscordException, MissingPermissionsException {
+        if(!FileManager.timeZoneDBFile.exists())
+            FileManager.createFileObject();
+        if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null){
+            MessageSender.sendMessage("It's " + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfWeek(), channel);
+        }else{
+            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
+        }
+    }
     public static void inviteLinkCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=0x00000008", channel);
     }
@@ -53,13 +61,13 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n!botworking\n!time / !zeit\n!date / !datum\n!settimezone <timeZone>\n!invlink / !invitelink\n!invlinktesting / !invitelinktesting\n!koala\n```", channel);
+        MessageSender.sendMessage("```HELP\n!botworking\n!time / !zeit\n!date / !datum\n!weekday / !wochentag\n!settimezone <timeZone>\n!invlink / !invitelink\n!invlinktesting / !invitelinktesting\n!koala\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
         MessageSender.sendMessage("" + ZonedDateTime.now(zone).getHour() + ":" + ZonedDateTime.now(zone).getMinute(), channel);
     }
-    public static void setTimezoneCommand(IMessage message) throws IOException {
+    public static void setTimezoneCommand(IMessage message) throws IOException {        //TODO:convert from IMessage to Guild, Channel and ArrayList (args)
         String zone = new StringBuilder(message.getContent()).delete(0,13).toString();
         FileManager.writeIntoDatabase(message.getGuild(), zone);
     }
