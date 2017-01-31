@@ -73,6 +73,10 @@ public class CommandManager {
             Commands.gitCommand(channel);
             return;
         }
+        if(args.get(0).equals("say") || args.get(0).equals("sag")){
+            Commands.sayCommand(channel, args);
+            return;
+        }
 
 
     }

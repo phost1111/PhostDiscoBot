@@ -12,6 +12,7 @@ import utils.MessageSender;
 import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 
 /**
  * Created by Phost on 22.01.2017.
@@ -62,17 +63,27 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
+        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
         MessageSender.sendMessage("" + ZonedDateTime.now(zone).getHour() + ":" + ZonedDateTime.now(zone).getMinute(), channel);
     }
-    public static void setTimezoneCommand(IGuild guild, String zone) throws IOException {        //TODO:convert from IMessage to Guild, Channel and ArrayList (args)
+    public static void setTimezoneCommand(IGuild guild, String zone) throws IOException {
         FileManager.writeIntoDatabase(guild, zone);
     }
     public static void gitCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("https://github.com/phost1111/PhostDiscoBot", channel);
+    }
+    public static void sayCommand(IChannel channel, ArrayList<String> args) throws RateLimitException, DiscordException, MissingPermissionsException {
+        args.remove(0);
+        String out = "";
+        int i = args.size();
+        while(i >= 1){
+            out += args.get(args.size() - i) + " ";
+            i--;
+        }
+        MessageSender.sendMessage(out, channel);
     }
 
 
