@@ -25,7 +25,6 @@ public class CommandManager {
         while(scanner.hasNext()){
             args.add(scanner.next());
         }
-        System.out.println(args.get(0));
         if(args.get(0).equals("botworking")){
             Commands.botWorkingCommand(channel);
             return;
