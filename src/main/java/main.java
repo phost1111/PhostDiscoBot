@@ -1,6 +1,7 @@
 import events.MessageReceivedEventListener;
 import events.ReadyEventListener;
 import client.ClientManager;
+import events.UserJoinEventListener;
 import utils.FileManager;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class main {
         ClientManager.newDispatcher();
         ClientManager.getDispatcher().registerListener(new ReadyEventListener());
         ClientManager.getDispatcher().registerListener(new MessageReceivedEventListener());
+        ClientManager.getDispatcher().registerListener(new UserJoinEventListener());
 
     }
 }
