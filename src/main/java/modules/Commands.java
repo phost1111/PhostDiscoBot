@@ -54,10 +54,10 @@ public class Commands {
         }
     }
     public static void inviteLinkCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=0x00000008", channel);
+        MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=272381828109828097&scope=bot&permissions=536345663", channel);
     }
     public static void inviteLinkTestingCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=222058371996581890&scope=bot&permissions=0x00000008", channel);
+        MessageSender.sendMessage("https://discordapp.com/oauth2/authorize?&client_id=222058371996581890&scope=bot&permissions=536345663", channel);
     }
     public static void koalaCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
@@ -84,6 +84,12 @@ public class Commands {
             i--;
         }
         MessageSender.sendMessage(out, channel);
+    }
+    public static void paIstTollCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        MessageSender.sendMessage("hellyeah", channel);
+    }
+    public static void kekCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        MessageSender.sendMessage("se sind lecker!", channel);
     }
 
 

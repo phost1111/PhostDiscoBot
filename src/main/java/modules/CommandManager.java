@@ -77,6 +77,14 @@ public class CommandManager {
             Commands.sayCommand(channel, args);
             return;
         }
+        if(args.get(0).equals("paisttoll")){
+            Commands.paIstTollCommand(channel);
+            return;
+        }
+        if(args.get(0).equals("kek")){
+            Commands.kekCommand(channel);
+            return;
+        }
 
 
     }
