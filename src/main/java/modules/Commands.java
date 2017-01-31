@@ -62,7 +62,7 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n```", channel);
+        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
@@ -70,6 +70,9 @@ public class Commands {
     }
     public static void setTimezoneCommand(IGuild guild, String zone) throws IOException {        //TODO:convert from IMessage to Guild, Channel and ArrayList (args)
         FileManager.writeIntoDatabase(guild, zone);
+    }
+    public static void gitCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        MessageSender.sendMessage("https://github.com/phost1111/PhostDiscoBot", channel);
     }
 
 

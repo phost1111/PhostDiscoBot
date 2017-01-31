@@ -5,6 +5,7 @@ import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
+import utils.MessageSender;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +31,10 @@ public class CommandManager {
             return;
         }
         if(args.get(0).equals("settimezone")){
-            Commands.setTimezoneCommand(channel.getGuild(), args.get(1));
+            if(args.size() > 1)
+                Commands.setTimezoneCommand(channel.getGuild(), args.get(1));
+            else
+                MessageSender.sendMessage("Use the command like this: ```♥settimezone <yourTimezone>```", channel);
             return;
         }
         if(args.get(0).equals("time") || args.get(0).equals("zeit")){
@@ -63,6 +67,10 @@ public class CommandManager {
         }
         if(args.get(0).equals("testcommand") && ClientManager.getDeveloperMode()){
             Commands.testCommand(channel);
+            return;
+        }
+        if(args.get(0).equals("git")){
+            Commands.gitCommand(channel);
             return;
         }
 
