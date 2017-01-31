@@ -84,6 +84,10 @@ public class CommandManager {
             Commands.kekCommand(channel);
             return;
         }
+        if(args.get(0).equals("discord")){
+            Commands.discordCommand(channel);
+            return;
+        }
 
 
     }

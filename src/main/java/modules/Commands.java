@@ -91,6 +91,9 @@ public class Commands {
     public static void kekCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("se sind lecker!", channel);
     }
+    public static void discordCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        MessageSender.sendMessage("WIr haben zu viele Server nd Bots. Warum machen wir das? Make Discord Great Again!", channel);
+    }
 
 
 
