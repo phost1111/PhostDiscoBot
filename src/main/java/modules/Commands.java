@@ -1,5 +1,6 @@
 package modules;
 
+import client.ClientManager;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IMessage;
@@ -93,6 +94,9 @@ public class Commands {
     }
     public static void discordCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("WIr haben zu viele Server nd Bots. Warum machen wir das? Make Discord Great Again!", channel);
+    }
+    public static void devCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
+        MessageSender.sendMessage("Send a PM to this guy: " + ClientManager.getClientInstance().getUserByID("139354514091147264").mention(), channel);
     }
 
 

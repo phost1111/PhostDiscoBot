@@ -13,7 +13,7 @@ public class ClientManager {
     public static boolean isDeveloperMode;
     public static IDiscordClient theClient;
     public static EventDispatcher theDispatcher;
-    public static String Version = "0.2";
+    public static String Version = "0.2.1";
 
 
     public static void newClientInstance(String token, Boolean login){

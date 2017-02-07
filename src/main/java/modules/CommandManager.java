@@ -88,6 +88,10 @@ public class CommandManager {
             Commands.discordCommand(channel);
             return;
         }
+        if(args.get(0).equals("dev") || args.get(0).equals("calldev") || args.get(0).equals("developer") || args.get(0).equals("entwickler")){
+            Commands.devCommand(channel);
+            return;
+        }
 
 
     }
