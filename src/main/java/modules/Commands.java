@@ -64,7 +64,7 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
+        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥dev / ♥developer / ♥entwickler\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
