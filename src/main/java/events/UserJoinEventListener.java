@@ -18,7 +18,6 @@ import java.util.List;
  * Created by Phost on 31.01.2017.
  */
 public class UserJoinEventListener {
-    //TODO: Make everything the timezone set by ♥settimezone command instead of server time
     @EventSubscriber
     public void onUserJoinEvent(UserJoinEvent event) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
         List<IChannel> channels = event.getGuild().getChannels();

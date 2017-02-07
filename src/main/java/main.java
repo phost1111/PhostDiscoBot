@@ -11,9 +11,6 @@ import java.util.Scanner;
 
 
 
-//TODOLIST
-//TODO:Add UserBanEvent
-//TODO:Add UserLeaveEvent
 public class main {
 
     public static void main(String[] args) throws IOException {
