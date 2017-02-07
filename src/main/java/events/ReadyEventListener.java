@@ -19,7 +19,7 @@ public class ReadyEventListener {
 
     @EventSubscriber
     public void onReadyEvent(ReadyEvent event) throws RateLimitException, DiscordException, MissingPermissionsException {
-        List<IChannel> channels = ClientManager.getClientInstance().getChannels(true);
+        List<IChannel> channels = ClientManager.getClientInstance().getChannels(false);
         List<IGuild> guilds = ClientManager.getClientInstance().getGuilds();
         System.out.println("GUILDS: ");
         for (int i = guilds.size(); i >= 1; i--) {
