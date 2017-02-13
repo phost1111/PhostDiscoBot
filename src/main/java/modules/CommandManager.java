@@ -92,6 +92,9 @@ public class CommandManager {
             Commands.devCommand(channel);
             return;
         }
+        //if(args.get(0).equals("prune")){
+        //    Commands.pruneCommand(channel, Integer.parseInt(args.get(1)));
+        //}
 
 
     }

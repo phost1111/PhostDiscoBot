@@ -5,6 +5,7 @@ import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.util.MessageList;
 import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
 import utils.FileManager;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Phost on 22.01.2017.
@@ -97,6 +99,8 @@ public class Commands {
     }
     public static void devCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("Send a PM to this guy: " + ClientManager.getClientInstance().getUserByID("139354514091147264").mention(), channel);
+    }
+    public static void pruneCommand(IChannel channel, int amount) throws RateLimitException, DiscordException, MissingPermissionsException {
     }
 
 
