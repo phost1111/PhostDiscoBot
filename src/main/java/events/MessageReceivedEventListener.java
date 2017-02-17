@@ -1,6 +1,7 @@
 package events;
 
 import client.ClientManager;
+import console.ConsoleCommandManager;
 import modules.CommandManager;
 import modules.Commands;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -19,10 +20,14 @@ public class MessageReceivedEventListener {
 
     @EventSubscriber
     public void onMessageReceivedEvent(MessageReceivedEvent event) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+        System.out.println("Private: " + event.getMessage().getChannel().isPrivate() + " ID: " + event.getMessage().getChannel().getID() + " startsWithStar: " + event.getMessage().getContent().startsWith("*"));
+        if(event.getMessage().getChannel().isPrivate() && event.getMessage().getChannel().getID().equals("241222722275770368") && event.getMessage().getContent().startsWith("*")){
+            ConsoleCommandManager.consoleCommandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString());
+            return;
+        }
         if(event.getMessage().getContent().startsWith("♥")){
-            CommandManager.commandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString(), event.getMessage());
+                CommandManager.commandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString(), event.getMessage());
                 System.out.println("Command received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
-
         }else{
                 System.out.println("Message received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
         }

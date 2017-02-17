@@ -28,7 +28,7 @@ public class ReadyEventListener {
         System.out.println("CHANNELS: ");
         for (int i = channels.size(); i >= 1; i--) {
             System.out.println("" + channels.get(i - 1).getName() + " in: " + channels.get(i - 1).getGuild().getName());
-            if (channels.get(i - 1).getID().equals(channels.get(i - 1).getGuild().getID())) {
+            if (channels.get(i - 1).getID().equals(channels.get(i - 1).getGuild().getID()) && !ClientManager.getDeveloperMode()) {
                     MessageSender.sendMessage("Bot online! V." + ClientManager.Version, channels.get(i - 1));
             }
         }

@@ -1,5 +1,6 @@
 import events.*;
 import client.ClientManager;
+import console.ConsoleCommandManager;
 import utils.FileManager;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class main {
     public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
-        ClientManager.setDeveloperMode(false);   //THIS TELLS THE BOT WHETHER HE IS IN DEV MODE OR NOT
+        ClientManager.setDeveloperMode(true);   //THIS TELLS THE BOT WHETHER HE IS IN DEV MODE OR NOT
         System.out.println("Please enter your bot Token");
         FileManager.createFileObject();
         ClientManager.newClientInstance(scanner.next(), true);
@@ -26,6 +27,5 @@ public class main {
         ClientManager.getDispatcher().registerListener(new UserJoinEventListener());
         ClientManager.getDispatcher().registerListener(new UserBanEventListener());
         ClientManager.getDispatcher().registerListener(new UserLeaveEventListener());
-
     }
 }
