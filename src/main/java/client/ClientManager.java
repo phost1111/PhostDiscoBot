@@ -30,7 +30,7 @@ public class ClientManager {
     }
 
     public static void setPlaying(String s){
-        theClient.changeStatus(Status.game(s));
+        theClient.changePlayingText(s);
     }
 
     public static void newDispatcher(){

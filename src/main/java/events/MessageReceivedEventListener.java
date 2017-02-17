@@ -1,11 +1,13 @@
 package events;
 
 import client.ClientManager;
+import com.vdurmont.emoji.EmojiParser;
 import console.ConsoleCommandManager;
 import modules.CommandManager;
 import modules.Commands;
 import sx.blah.discord.api.events.EventSubscriber;
-import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
+import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.obj.IEmoji;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.MissingPermissionsException;
@@ -31,7 +33,7 @@ public class MessageReceivedEventListener {
                 System.out.println("Message received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
         }
         if(event.getMessage().getContent().toLowerCase().contains("zombey")){
-            event.getMessage().addReaction(event.getMessage().getGuild().getEmojiByName(""));
+            event.getMessage().addReaction(EmojiParser.parseToUnicode(":sparkling_heart:"));
         }
 
     }
