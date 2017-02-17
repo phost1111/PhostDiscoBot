@@ -55,5 +55,15 @@ public class ConsoleCommandManager {
             ConsoleCommands.shutdownConsoleCommand();
             return;
         }
+
+        if(args.get(0).equals("write")){
+            ConsoleCommands.writeConsoleCommand(args);
+            return;
+        }
+
+        if(args.get(0).equals("help")){
+            ConsoleCommands.helpConsoleCommand(ClientManager.getClientInstance().getOrCreatePMChannel(ClientManager.getClientInstance().getUserByID("139354514091147264")));
+            return;
+        }
     }
 }

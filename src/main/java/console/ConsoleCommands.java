@@ -56,4 +56,24 @@ public class ConsoleCommands {
     public static void shutdownConsoleCommand() throws DiscordException {
         ClientManager.endClientInstance();
     }
+
+    public static void writeConsoleCommand(ArrayList<String> args) {
+        if(args.size() > 2) {
+            String ChannelID = args.get(1);
+            args.remove(0);
+            args.remove(0);
+            String out = "";
+            int o = args.size();
+            while(o >= 1) {
+                out += args.get(args.size() - o) + " ";
+                o--;
+            }
+            MessageSender.sendMessage(out, ClientManager.getClientInstance().getChannelByID(ChannelID));
+
+        }
+    }
+
+    public static void helpConsoleCommand(IChannel channel){
+        MessageSender.sendMessage("```rl\nannounce <msg>\ndelmsg <msgID>\nsetplaying <text>\nshutdown\nwrite <channelID, text>```", channel);
+    }
 }
