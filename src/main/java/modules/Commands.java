@@ -11,7 +11,9 @@ import sx.blah.discord.util.RateLimitException;
 import utils.FileManager;
 import utils.MessageSender;
 
+import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -66,7 +68,7 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥dev / ♥developer / ♥entwickler\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
+        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥prune / ♥clear\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥dev / ♥developer / ♥entwickler\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
@@ -95,12 +97,51 @@ public class Commands {
         MessageSender.sendMessage("se sind lecker!", channel);
     }
     public static void discordCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("WIr haben zu viele Server nd Bots. Warum machen wir das? Make Discord Great Again!", channel);
+        MessageSender.sendMessage("Wir haben zu viele Server und Bots. Warum machen wir das? Make Discord Great Again!", channel);
     }
     public static void devCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("Send a PM to this guy: " + ClientManager.getClientInstance().getUserByID("139354514091147264").mention(), channel);
     }
-    public static void pruneCommand(IChannel channel, int amount) throws RateLimitException, DiscordException, MissingPermissionsException {
+    public static void pruneCommand(IMessage message, String Samount) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+        if(message.getGuild().getRolesByName("PhostBotAdmin").size() <= 0){
+            MessageSender.sendMessage("There is no PhostBotAdmin role on this server. You need this role to use admin commands", message.getChannel());
+            return;
+        }
+        if(message.getAuthor().getRolesForGuild(message.getGuild()).contains(message.getGuild().getRolesByName("PhostBotAdmin").get(0))) {
+            int amount = 0;
+            try {
+                amount = Integer.parseInt(Samount);
+            } catch (NumberFormatException e) {
+                MessageSender.sendMessage("Please use a real number for this command", message.getChannel());
+                return;
+            }
+            if (amount < 2 || amount > 100) {
+                MessageSender.sendMessage("You can only delete 2-100 messages at a time", message.getChannel());
+                return;
+            }
+            MessageList allMessages = message.getChannel().getMessages();
+            ArrayList<IMessage> toDelete = new ArrayList<IMessage>();
+            if (amount > allMessages.size())
+                MessageSender.sendMessage("There are not that many messages in this channel", message.getChannel());
+            for (int i = amount; i >= 1; i--) {
+                if (!(allMessages.get(0).getTimestamp().plusWeeks(2).isAfter(LocalDateTime.now()))) {
+                    allMessages.remove(0);
+                } else {
+                    toDelete.add(allMessages.get(0));
+                    allMessages.remove(0);
+                }
+            }
+            toDelete.add(message);
+            if (toDelete != null && toDelete.size() > 1) {
+                allMessages.bulkDelete(toDelete);
+            } else {
+                MessageSender.sendMessage("There are not enough messages eligable to delete", message.getChannel());
+            }
+            if (!message.isDeleted())
+                message.delete();
+        }else{
+            MessageSender.sendMessage("You need the PhostBotAdmin role to do that!", message.getChannel());
+        }
     }
 
 

@@ -20,7 +20,7 @@ public class MessageReceivedEventListener {
     @EventSubscriber
     public void onMessageReceivedEvent(MessageReceivedEvent event) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
         if(event.getMessage().getContent().startsWith("♥")){
-            CommandManager.commandIn(event.getMessage().getChannel(), new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString());
+            CommandManager.commandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString(), event.getMessage());
                 System.out.println("Command received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
 
         }else{

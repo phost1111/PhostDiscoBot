@@ -2,6 +2,7 @@ package modules;
 
 import client.ClientManager;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
@@ -16,7 +17,7 @@ import java.util.Scanner;
  */
 public class CommandManager {
 
-    public static void commandIn(IChannel channel, String command) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
+    public static void commandIn(String command, IMessage message) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
         ArrayList<String> args = new ArrayList<String>();
         ArrayList<String> tempCharList = new ArrayList<String>();
         String temp = null;
@@ -26,75 +27,78 @@ public class CommandManager {
             args.add(scanner.next());
         }
         if(args.get(0).equals("botworking")){
-            Commands.botWorkingCommand(channel);
+            Commands.botWorkingCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("settimezone")){
             if(args.size() > 1)
-                Commands.setTimezoneCommand(channel.getGuild(), args.get(1));
+                Commands.setTimezoneCommand(message.getGuild(), args.get(1));
             else
-                MessageSender.sendMessage("Use the command like this: ```♥settimezone <yourTimezone>```", channel);
+                MessageSender.sendMessage("Use the command like this: ```♥settimezone <yourTimezone>```", message.getChannel());
             return;
         }
         if(args.get(0).equals("time") || args.get(0).equals("zeit")){
-            Commands.timeCommand(channel);
+            Commands.timeCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("date") || args.get(0).equals("datum")){
-            Commands.dateCommand(channel);
+            Commands.dateCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("weekday") || args.get(0).equals("wochentag")){
-            Commands.weekDayCommand(channel);
+            Commands.weekDayCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("invlink") || args.get(0).equals("invitelink")){
-            Commands.inviteLinkCommand(channel);
+            Commands.inviteLinkCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("invlinktesting") || args.get(0).equals("invitelinktesting")){
-            Commands.inviteLinkTestingCommand(channel);
+            Commands.inviteLinkTestingCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("koala")){
-            Commands.koalaCommand(channel);
+            Commands.koalaCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("help") || args.get(0).equals("hilfe")){
-            Commands.helpCommand(channel);
+            Commands.helpCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("testcommand") && ClientManager.getDeveloperMode()){
-            Commands.testCommand(channel);
+            Commands.testCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("git")){
-            Commands.gitCommand(channel);
+            Commands.gitCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("say") || args.get(0).equals("sag")){
-            Commands.sayCommand(channel, args);
+            Commands.sayCommand(message.getChannel(), args);
             return;
         }
         if(args.get(0).equals("paisttoll")){
-            Commands.paIstTollCommand(channel);
+            Commands.paIstTollCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("kek")){
-            Commands.kekCommand(channel);
+            Commands.kekCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("discord")){
-            Commands.discordCommand(channel);
+            Commands.discordCommand(message.getChannel());
             return;
         }
         if(args.get(0).equals("dev") || args.get(0).equals("calldev") || args.get(0).equals("developer") || args.get(0).equals("entwickler")){
-            Commands.devCommand(channel);
+            Commands.devCommand(message.getChannel());
             return;
         }
-        //if(args.get(0).equals("prune")){
-        //    Commands.pruneCommand(channel, Integer.parseInt(args.get(1)));
-        //}
+        if(args.get(0).equals("prune") || args.get(0).equals("clear")){
+            if(args.size() > 1)
+                Commands.pruneCommand(message, args.get(1));
+            else
+                MessageSender.sendMessage("Please provide how many messages you want to delete", message.getChannel());
+        }
 
 
     }
