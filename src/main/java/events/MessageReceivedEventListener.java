@@ -30,7 +30,9 @@ public class MessageReceivedEventListener {
         }else{
                 System.out.println("Message received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
         }
-
+        if(event.getMessage().getContent().toLowerCase().contains("zombey")){
+            event.getMessage().addReaction(event.getMessage().getGuild().getEmojiByName(""));
+        }
 
     }
 

@@ -41,4 +41,19 @@ public class ConsoleCommands {
     public static void deleteMessageConsoleCommand(String messageID) throws RateLimitException, DiscordException, MissingPermissionsException {
         ClientManager.getClientInstance().getMessageByID(messageID).delete();
     }
+
+    public static void setPlayingConsoleCommand(ArrayList<String> args) {
+        args.remove(0);
+        String out = "";
+        int o = args.size();
+        while(o >= 1) {
+            out += args.get(args.size() - o) + " ";
+            o--;
+        }
+        ClientManager.setPlaying(out);
+    }
+
+    public static void shutdownConsoleCommand() throws DiscordException {
+        ClientManager.endClientInstance();
+    }
 }

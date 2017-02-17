@@ -45,5 +45,15 @@ public class ConsoleCommandManager {
             ConsoleCommands.deleteMessageConsoleCommand(args.get(1));
             return;
         }
+
+        if(args.get(0).equals("setplaying")){
+            ConsoleCommands.setPlayingConsoleCommand(args);
+            return;
+        }
+
+        if(args.get(0).equals("shutdown")){
+            ConsoleCommands.shutdownConsoleCommand();
+            return;
+        }
     }
 }

@@ -3,6 +3,7 @@ package client;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
+import sx.blah.discord.handle.obj.Status;
 import sx.blah.discord.util.DiscordException;
 
 /**
@@ -13,7 +14,7 @@ public class ClientManager {
     public static boolean isDeveloperMode;
     public static IDiscordClient theClient;
     public static EventDispatcher theDispatcher;
-    public static String Version = "0.3.1b";
+    public static String Version = "0.3.2-SNAPSHOT";
 
 
     public static void newClientInstance(String token, Boolean login){
@@ -26,6 +27,10 @@ public class ClientManager {
 
     public static IDiscordClient getClientInstance(){
         return theClient;
+    }
+
+    public static void setPlaying(String s){
+        theClient.changeStatus(Status.game(s));
     }
 
     public static void newDispatcher(){
