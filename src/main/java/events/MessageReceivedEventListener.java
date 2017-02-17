@@ -20,8 +20,7 @@ public class MessageReceivedEventListener {
 
     @EventSubscriber
     public void onMessageReceivedEvent(MessageReceivedEvent event) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
-        System.out.println("Private: " + event.getMessage().getChannel().isPrivate() + " ID: " + event.getMessage().getChannel().getID() + " startsWithStar: " + event.getMessage().getContent().startsWith("*"));
-        if(event.getMessage().getChannel().isPrivate() && event.getMessage().getChannel().getID().equals("241222722275770368") && event.getMessage().getContent().startsWith("*")){
+        if(event.getMessage().getChannel().isPrivate() && event.getMessage().getAuthor().getID().equals("139354514091147264") && event.getMessage().getContent().startsWith("*")){
             ConsoleCommandManager.consoleCommandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString());
             return;
         }
