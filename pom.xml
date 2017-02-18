@@ -6,7 +6,7 @@
 
     <groupId>com.phost</groupId>
     <artifactId>discordbot</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.2a</version>
 
     <repositories>
         <repository>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4j</artifactId>
-            <version>5213b02</version>
+            <version>dev-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
