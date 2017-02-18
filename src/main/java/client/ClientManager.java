@@ -13,7 +13,8 @@ public class ClientManager {
     public static boolean isDeveloperMode;
     public static IDiscordClient theClient;
     public static EventDispatcher theDispatcher;
-    public static String Version = "0.3.3-SNAPSHOT";
+    public static String Version = "0.3.3";
+    public static String BotAdminID = "139354514091147264";
 
 
     public static void newClientInstance(String token, Boolean login){
@@ -48,7 +49,9 @@ public class ClientManager {
         return isDeveloperMode;
     }
 
-
+    public static String getBotAdminID(){
+        return BotAdminID;
+    }
 
     public static IDiscordClient createClient(String token, boolean login) { // Returns a new instance of the Discord client
         ClientBuilder clientBuilder = new ClientBuilder(); // Creates the ClientBuilder instance

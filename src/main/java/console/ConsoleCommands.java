@@ -1,7 +1,9 @@
 package console;
 
 import client.ClientManager;
+import sun.misc.Cleaner;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
@@ -74,6 +76,40 @@ public class ConsoleCommands {
     }
 
     public static void helpConsoleCommand(IChannel channel){
-        MessageSender.sendMessage("```rl\nannounce <msg>\ndelmsg <msgID>\nsetplaying <text>\nshutdown\nwrite <channelID, text>```", channel);
+        MessageSender.sendMessage("```Phost\nrl\nannounce <msg>\ndelmsg <msgID>\nsetplaying <text>\nshutdown\nwrite <channelID> <text>\ndelchannel <channelID>\ncreatechannel <guildID> <channelName>\ndelvchannel <vchannelID>\ncreatevchannel <guildID> <vChannelName>```", channel);
+    }
+
+    public static void deleteChannelConsoleCommand(String channelID) {
+        ClientManager.getClientInstance().getChannelByID(channelID).delete();
+    }
+
+    public static void createChannelConsoleCommand(ArrayList<String> args){
+        String guildID = args.get(1);
+        args.remove(0);
+        args.remove(0);
+        String out = "";
+        int o = args.size();
+        while(o >= 1) {
+            out += args.get(args.size() - o) + " ";
+            o--;
+        }
+        ClientManager.getClientInstance().getGuildByID(guildID).createChannel(out);
+    }
+
+    public static void deleteVoiceChannelConsoleCommand(String voiceChannelID){
+        ClientManager.getClientInstance().getVoiceChannelByID(voiceChannelID).delete();
+    }
+
+    public static void createVoiceChannelConsoleCommand(ArrayList<String> args){
+        String guildID = args.get(1);
+        args.remove(0);
+        args.remove(0);
+        String out = "";
+        int o = args.size();
+        while(o >= 1) {
+            out += args.get(args.size() - o) + " ";
+            o--;
+        }
+        ClientManager.getClientInstance().getGuildByID(guildID).createVoiceChannel(out);
     }
 }

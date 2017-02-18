@@ -1,4 +1,4 @@
-package modules;
+package commands;
 
 import client.ClientManager;
 import sx.blah.discord.handle.obj.IChannel;
@@ -11,13 +11,11 @@ import sx.blah.discord.util.RateLimitException;
 import utils.FileManager;
 import utils.MessageSender;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Phost on 22.01.2017.
@@ -107,7 +105,7 @@ public class Commands {
             MessageSender.sendMessage("There is no PhostBotAdmin role on this server. You need this role to use admin commands", message.getChannel());
             return;
         }
-        if(message.getAuthor().getRolesForGuild(message.getGuild()).contains(message.getGuild().getRolesByName("PhostBotAdmin").get(0))) {
+        if(message.getAuthor().getRolesForGuild(message.getGuild()).contains(message.getGuild().getRolesByName("PhostBotAdmin").get(0)) || message.getAuthor().getID().equals(ClientManager.getBotAdminID())) {
             int amount = 0;
             try {
                 amount = Integer.parseInt(Samount);

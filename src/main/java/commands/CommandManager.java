@@ -1,7 +1,6 @@
-package modules;
+package commands;
 
 import client.ClientManager;
-import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.MissingPermissionsException;

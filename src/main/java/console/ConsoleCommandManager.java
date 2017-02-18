@@ -62,7 +62,27 @@ public class ConsoleCommandManager {
         }
 
         if(args.get(0).equals("help")){
-            ConsoleCommands.helpConsoleCommand(ClientManager.getClientInstance().getOrCreatePMChannel(ClientManager.getClientInstance().getUserByID("139354514091147264")));
+            ConsoleCommands.helpConsoleCommand(ClientManager.getClientInstance().getOrCreatePMChannel(ClientManager.getClientInstance().getUserByID(ClientManager.getBotAdminID())));
+            return;
+        }
+
+        if(args.get(0).equals("delchannel")){
+            ConsoleCommands.deleteChannelConsoleCommand(args.get(1));
+            return;
+        }
+
+        if(args.get(0).equals("createchannel")){
+            ConsoleCommands.createChannelConsoleCommand(args);
+            return;
+        }
+
+        if(args.get(0).equals("delvchannel")){
+            ConsoleCommands.deleteVoiceChannelConsoleCommand(args.get(1));
+            return;
+        }
+
+        if(args.get(0).equals("createvchannel")){
+            ConsoleCommands.createVoiceChannelConsoleCommand(args);
             return;
         }
     }
