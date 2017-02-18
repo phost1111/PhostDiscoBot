@@ -76,7 +76,7 @@ public class ConsoleCommands {
     }
 
     public static void helpConsoleCommand(IChannel channel){
-        MessageSender.sendMessage("```Phost\nrl\nannounce <msg>\ndelmsg <msgID>\nsetplaying <text>\nshutdown\nwrite <channelID> <text>\ndelchannel <channelID>\ncreatechannel <guildID> <channelName>\ndelvchannel <vchannelID>\ncreatevchannel <guildID> <vChannelName>```", channel);
+        MessageSender.sendMessage("```Phost\nrl\nannounce <msg>\ndelmsg <msgID>\nsetplaying <text>\nshutdown\nwrite <channelID> <text>\ndelchannel <channelID>\ncreatechannel <guildID> <channelName>\ndelvchannel <vchannelID>\ncreatevchannel <guildID> <vChannelName>\ncreateinv <guildID>```", channel);
     }
 
     public static void deleteChannelConsoleCommand(String channelID) {
@@ -111,5 +111,9 @@ public class ConsoleCommands {
             o--;
         }
         ClientManager.getClientInstance().getGuildByID(guildID).createVoiceChannel(out);
+    }
+
+    public static void createInviteConsoleCommand(String guildID){
+        MessageSender.sendMessage(ClientManager.getClientInstance().getGuildByID(guildID).getGeneralChannel().createInvite(0, 0, false, false).getInviteCode(), ClientManager.getClientInstance().getOrCreatePMChannel(ClientManager.getClientInstance().getUserByID(ClientManager.getBotAdminID())));
     }
 }

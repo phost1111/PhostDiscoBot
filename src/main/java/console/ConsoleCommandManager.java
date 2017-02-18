@@ -85,5 +85,9 @@ public class ConsoleCommandManager {
             ConsoleCommands.createVoiceChannelConsoleCommand(args);
             return;
         }
+
+        if(args.get(0).equals("createinv")){
+            ConsoleCommands.createInviteConsoleCommand(args.get(1));
+        }
     }
 }
