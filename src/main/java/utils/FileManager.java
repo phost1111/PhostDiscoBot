@@ -23,13 +23,7 @@ public class FileManager {
             createFileObject();
         if(!timeZoneDBFile.exists())
             timeZoneDBFile.createNewFile();
-        Boolean alreadyExistsTemp = null;
         if(checkIfAlreadyExists(guild) != null){
-            alreadyExistsTemp = true;
-        }else{
-            alreadyExistsTemp = false;
-        }
-        if(alreadyExistsTemp){
             replaceInDB(guild, toWrite);
         }else{
             addToDB(guild, toWrite);
