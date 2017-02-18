@@ -37,7 +37,7 @@ public class Commands {
             else
                 MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getHour() + ":0" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute(), channel);
         }else{
-            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
+            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '♥settimezone <yourTimezone>'\n```", channel);
         }
     }
     public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
@@ -46,7 +46,7 @@ public class Commands {
         if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
             MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getYear(), channel);
         }else{
-            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
+            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '♥settimezone <yourTimezone>'\n```", channel);
         }
     }
     public static void weekDayCommand(IChannel channel) throws IOException, RateLimitException, DiscordException, MissingPermissionsException {
@@ -55,7 +55,7 @@ public class Commands {
         if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null){
             MessageSender.sendMessage("It's " + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfWeek(), channel);
         }else{
-            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '!settimezone <yourTimezone>'\n```", channel);
+            MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '♥settimezone <yourTimezone>'\n```", channel);
         }
     }
     public static void inviteLinkCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
