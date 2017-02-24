@@ -27,6 +27,7 @@ public class main {
         ClientManager.getDispatcher().registerListener(new UserJoinEventListener());
         ClientManager.getDispatcher().registerListener(new UserBanEventListener());
         ClientManager.getDispatcher().registerListener(new UserLeaveEventListener());
-        FileManager2.writeIntoFile(FileManager2.getAndCreateFile("test"));
+        FileManager2.writeIntoFile(FileManager2.getAndCreateFile("Dieter"), "MoinAPO", "TheseNUTZZZZZ");
+        System.out.println(FileManager2.searchInFile(FileManager2.getAndCreateFile("Dieter"), "MoinAPO"));
     }
 }
