@@ -13,7 +13,7 @@ public class ClientManager {
     public static boolean isDeveloperMode;
     public static IDiscordClient theClient;
     public static EventDispatcher theDispatcher;
-    public static String Version = "0.4";
+    public static String Version = "0.4.1-SNAPSHOT";
     public static String BotAdminID = "139354514091147264";
 
 

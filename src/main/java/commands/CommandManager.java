@@ -97,12 +97,15 @@ public class CommandManager {
                 Commands.pruneCommand(message, args.get(1));
             else
                 MessageSender.sendMessage("Please provide how many messages you want to delete", message.getChannel());
+            return;
         }
         if(args.get(0).equals("ttt")){
             Commands.tttCommand(args, message);
+            return;
         }
         if(args.get(0).equals("tttread")){
             Commands.tttReadCommand(args.get(1), message);
+            return;
         }
 
     }

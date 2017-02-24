@@ -4,10 +4,7 @@ import client.ClientManager;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IMessage;
-import sx.blah.discord.util.DiscordException;
-import sx.blah.discord.util.MessageList;
-import sx.blah.discord.util.MissingPermissionsException;
-import sx.blah.discord.util.RateLimitException;
+import sx.blah.discord.util.*;
 import utils.FileManager;
 import utils.MessageSender;
 
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Phost on 22.01.2017.
@@ -111,8 +109,8 @@ public class Commands {
                 MessageSender.sendMessage("You can only delete 2-100 messages at a time", message.getChannel());
                 return;
             }
-            MessageList allMessages = message.getChannel().getMessages();
-            ArrayList<IMessage> toDelete = new ArrayList<IMessage>();
+            MessageHistory allMessages = message.getChannel().getMessageHistory();
+            MessageHistory toDelete = new MessageHistory();
             if (amount > allMessages.size())
                 MessageSender.sendMessage("There are not that many messages in this channel", message.getChannel());
             for (int i = amount; i >= 1; i--) {
@@ -125,7 +123,7 @@ public class Commands {
             }
             toDelete.add(message);
             if (toDelete != null && toDelete.size() > 1) {
-                allMessages.bulkDelete(toDelete);
+                message.getChannel().bulkDelete(toDelete);
             } else {
                 MessageSender.sendMessage("There are not enough messages eligable to delete", message.getChannel());
             }

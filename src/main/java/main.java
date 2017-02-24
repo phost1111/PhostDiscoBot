@@ -14,7 +14,7 @@ public class main {
 
     public static void main(String[] args) throws IOException {
 
-        ClientManager.setDeveloperMode(false);   //THIS TELLS THE BOT WHETHER HE IS IN DEV MODE OR NOT
+        ClientManager.setDeveloperMode(true);   //THIS TELLS THE BOT WHETHER HE IS IN DEV MODE OR NOT
         System.out.println("Please enter your bot Token");
         ClientManager.newClientInstance(new Scanner(System.in).next(), true);
         ClientManager.newDispatcher();
