@@ -27,31 +27,25 @@ public class Commands {
         System.out.println("" + channel.getID() + " " + channel.getName());
     }
     public static void timeCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
-        if(!FileManager.timeZoneDBFile.exists())
-            FileManager.createFileObject();
-        if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
-            if (ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute() >= 10)
-                MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getHour() + ":" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute(), channel);
+        if(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()) != null){
+            if (ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getMinute() >= 10)
+                MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getHour() + ":" + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getMinute(), channel);
             else
-                MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getHour() + ":0" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMinute(), channel);
+                MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getHour() + ":0" + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getMinute(), channel);
         }else{
             MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '♥settimezone <yourTimezone>'\n```", channel);
         }
     }
     public static void dateCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
-        if(!FileManager.timeZoneDBFile.exists())
-            FileManager.createFileObject();
-        if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null) {
-            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getYear(), channel);
+        if(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()) != null) {
+            MessageSender.sendMessage("" + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getDayOfMonth() + "." + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getMonthValue() + "." + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getYear(), channel);
         }else{
             MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '♥settimezone <yourTimezone>'\n```", channel);
         }
     }
     public static void weekDayCommand(IChannel channel) throws IOException, RateLimitException, DiscordException, MissingPermissionsException {
-        if(!FileManager.timeZoneDBFile.exists())
-            FileManager.createFileObject();
-        if(FileManager.checkIfAlreadyExists(channel.getGuild()) != null){
-            MessageSender.sendMessage("It's " + ZonedDateTime.now(ZoneId.of(FileManager.checkIfAlreadyExists(channel.getGuild()))).getDayOfWeek(), channel);
+        if(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()) != null){
+            MessageSender.sendMessage("It's " + ZonedDateTime.now(ZoneId.of(FileManager.searchInFile("timeZoneDB", channel.getGuild().getID()))).getDayOfWeek(), channel);
         }else{
             MessageSender.sendMessage("```Phost\nSet your timezone first! To do so type '♥settimezone <yourTimezone>'\n```", channel);
         }
@@ -73,7 +67,7 @@ public class Commands {
         MessageSender.sendMessage("" + ZonedDateTime.now(zone).getHour() + ":" + ZonedDateTime.now(zone).getMinute(), channel);
     }
     public static void setTimezoneCommand(IGuild guild, String zone) throws IOException {
-        FileManager.writeIntoDatabase(guild, zone);
+        FileManager.replaceOrAddToFile("timeZoneDB", guild.getID(), zone);
     }
     public static void gitCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         MessageSender.sendMessage("https://github.com/phost1111/PhostDiscoBot", channel);

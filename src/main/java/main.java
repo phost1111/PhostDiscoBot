@@ -1,7 +1,5 @@
 import events.*;
 import client.ClientManager;
-import console.ConsoleCommandManager;
-import utils.FileManager;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,7 +16,6 @@ public class main {
 
         ClientManager.setDeveloperMode(true);   //THIS TELLS THE BOT WHETHER HE IS IN DEV MODE OR NOT
         System.out.println("Please enter your bot Token");
-        FileManager.createFileObject();
         ClientManager.newClientInstance(new Scanner(System.in).next(), true);
         ClientManager.newDispatcher();
         ClientManager.getDispatcher().registerListener(new ReadyEventListener());
