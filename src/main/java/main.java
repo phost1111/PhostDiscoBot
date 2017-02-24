@@ -2,6 +2,7 @@ import events.*;
 import client.ClientManager;
 import console.ConsoleCommandManager;
 import utils.FileManager;
+import utils.FileManager2;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -26,5 +27,6 @@ public class main {
         ClientManager.getDispatcher().registerListener(new UserJoinEventListener());
         ClientManager.getDispatcher().registerListener(new UserBanEventListener());
         ClientManager.getDispatcher().registerListener(new UserLeaveEventListener());
+        FileManager2.writeIntoFile(FileManager2.getAndCreateFile("test"));
     }
 }

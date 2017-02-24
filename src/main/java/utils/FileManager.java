@@ -64,7 +64,7 @@ public class FileManager {
         String temp = null;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(timeZoneDBFile));
         while((temp = bufferedReader.readLine()) != null){
-                lines.add(temp);
+            lines.add(temp);
         }
         bufferedReader.close();
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(timeZoneDBFile));
