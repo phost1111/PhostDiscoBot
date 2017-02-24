@@ -137,5 +137,36 @@ public class Commands {
     }
 
 
+    public static void tttCommand(ArrayList<String> args, IMessage message) throws IOException {
+        if(!(message.getAuthor().getID().equals(("139354514091147264")) || message.getAuthor().getID().equals("193344274279038995") || message.getAuthor().getID().equals("139741926147489792") || message.getAuthor().getID().equals("142739474147835904") || message.getAuthor().getID().equals("139387827291947008") || message.getAuthor().getID().equals("139384920920293376")))   //PHILIPP, GREGOR, LIONEL, LUCA, JULIUS, PA
+            return;
+        if(!(message.getGuild().getID().equals("139354710875439104") || message.getGuild().getID().equals("150699679137529858") || message.getGuild().getID().equals("208000784279797761") || message.getGuild().getID().equals("273512583057899522")))
+            return;
+        if(args.size() < 3)
+            return;
+        String temp = "";
+        String date = args.get(1);
+        args.remove(0);
+        args.remove(0);
+        String text = "";
+        int i = args.size();
+        while(i >= 1){
+            text += args.get(args.size() - i) + " ";
+            i--;
+        }
+        FileManager.replaceOrAddToFile(date, message.getAuthor().getName() + ":", text);
+    }
 
+    public static void tttReadCommand(String ID, IMessage message) throws IOException {
+        if(!(message.getAuthor().getID().equals(("139354514091147264")) || message.getAuthor().getID().equals("193344274279038995") || message.getAuthor().getID().equals("139741926147489792") || message.getAuthor().getID().equals("142739474147835904") || message.getAuthor().getID().equals("139387827291947008") || message.getAuthor().getID().equals("139384920920293376")))   //PHILIPP, GREGOR, LIONEL, LUCA, JULIUS, PA
+            return;
+        if(!(message.getGuild().getID().equals("139354710875439104") || message.getGuild().getID().equals("150699679137529858") || message.getGuild().getID().equals("208000784279797761") || message.getGuild().getID().equals("273512583057899522")))
+            return;
+        ArrayList<String> lines = FileManager.getFileLinesAsArrayList(ID);
+        String output = "";
+        for(int i = lines.size(); i > 0; i--){
+            output += lines.get(i - 1) + "\n";
+        }
+        MessageSender.sendMessage(output, message.getChannel());
+    }
 }
