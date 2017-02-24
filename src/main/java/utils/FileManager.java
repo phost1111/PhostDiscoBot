@@ -1,79 +1,95 @@
 package utils;
 
-import sx.blah.discord.handle.obj.IGuild;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import java.io.*;
 import java.util.ArrayList;
 
 /**
- * Created by Phost on 25.01.2017.
+ * Created by Phost on 24.02.2017.
  */
 public class FileManager {
 
-    public static File timeZoneDBFile;
-
-    public static void createFileObject() throws IOException {
-        timeZoneDBFile = new File("timeZoneDB.txt");
-        if(!timeZoneDBFile.exists())
-            timeZoneDBFile.createNewFile();
+    public static File getAndCreateFile(String fileName) throws IOException {
+        File file = new File(fileName + ".txt");
+        if(!file.exists())
+            file.createNewFile();
+        return file;
     }
 
-    public static void writeIntoDatabase(IGuild guild, String toWrite) throws IOException {
-        if(timeZoneDBFile == null)
-            createFileObject();
-        if(!timeZoneDBFile.exists())
-            timeZoneDBFile.createNewFile();
-        if(checkIfAlreadyExists(guild) != null){
-            replaceInDB(guild, toWrite);
-        }else{
-            addToDB(guild, toWrite);
-        }
-    }
 
-    public static String checkIfAlreadyExists(IGuild guild) throws IOException {
+    public static String searchInFile(File file, String ID) throws IOException {
+        if(file == null)
+            file = getAndCreateFile(file.getCanonicalPath());
+        if(!file.exists())
+            file.createNewFile();
         String temp = null;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(timeZoneDBFile));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         while((temp = bufferedReader.readLine()) != null){
-            if(temp.startsWith(guild.getID()))
-                return new StringBuilder(temp).delete(0, 19).toString();
+            if(temp.startsWith(ID))
+                return new StringBuilder(temp).delete(0, ID.length() + 1).toString();
         }
         return temp;
     }
 
-    public static void replaceInDB(IGuild guild, String toWrite) throws IOException {
-        ArrayList<String> lines = new ArrayList<String>();
+    public static String searchInFile(String fileString, String ID) throws IOException {
+        File file = getAndCreateFile(fileString);
+        if(file == null)
+            file = getAndCreateFile(file.getCanonicalPath());
+        if(!file.exists())
+            file.createNewFile();
         String temp = null;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(timeZoneDBFile));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         while((temp = bufferedReader.readLine()) != null){
-            if(temp.startsWith(guild.getID()))
-                lines.add("" + guild.getID() + " " + toWrite);
-            else
+            if(temp.startsWith(ID))
+                return new StringBuilder(temp).delete(0, ID.length() + 1).toString();
+        }
+        return temp;
+    }
+
+
+    public static void replaceOrAddToFile(File file, String ID, String toWrite) throws IOException {
+        if(file == null)
+            file = getAndCreateFile(file.getCanonicalPath());
+        if(!file.exists())
+            file.createNewFile();
+        ArrayList<String> lines = new ArrayList<String>();
+        String temp;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        while((temp = bufferedReader.readLine()) != null){
+            if(!temp.startsWith(ID))
                 lines.add(temp);
         }
         bufferedReader.close();
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(timeZoneDBFile));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
         for(int i = lines.size(); i >= 1; i--){
             bufferedWriter.write(lines.get(i - 1));
             bufferedWriter.newLine();
         }
+        bufferedWriter.write(ID + " " + toWrite);
         bufferedWriter.close();
     }
 
-    public static void addToDB(IGuild guild, String toWrite) throws IOException {
+    public static void replaceOrAddToFile(String fileString, String ID, String toWrite) throws IOException {
+        File file = getAndCreateFile(fileString);
+        if(file == null)
+            file = getAndCreateFile(file.getCanonicalPath());
+        if(!file.exists())
+            file.createNewFile();
         ArrayList<String> lines = new ArrayList<String>();
-        String temp = null;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(timeZoneDBFile));
+        String temp;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         while((temp = bufferedReader.readLine()) != null){
+            if(!temp.startsWith(ID))
                 lines.add(temp);
         }
         bufferedReader.close();
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(timeZoneDBFile));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
         for(int i = lines.size(); i >= 1; i--){
             bufferedWriter.write(lines.get(i - 1));
             bufferedWriter.newLine();
         }
-        bufferedWriter.write("" + guild.getID() + " " + toWrite);
+        bufferedWriter.write(ID + " " + toWrite);
         bufferedWriter.close();
     }
-
 }
