@@ -116,10 +116,17 @@ public class CommandManager {
             Commands.tttReadCommand(args.get(1), message);
             return;
         }
-        if(args.get(0).equals("giverole")){
+        if(args.get(0).equals("giverole") || args.get(0).equals("gvrle")){
             if(!guildHasAdminRole)
                 return;
             Commands.giveRoleCommand(args, message);
+            return;
+        }
+
+        if(args.get(0).equals("removerole") || args.get(0).equals("rmrle") || args.get(0).equals("takerole") || args.get(0).equals("tkrle")){
+            if(!guildHasAdminRole)
+                return;
+            Commands.removeRoleCommand(args, message);
             return;
         }
 

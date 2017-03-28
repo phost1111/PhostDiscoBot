@@ -56,7 +56,7 @@ public class Commands {
         MessageSender.sendMessage("http://www.koalastothemax.com/?aHR0cDovL2ltZ3VyLmNvbS9PSWowR2kxLmpwZw==", channel);
     }
     public static void helpCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
-        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥prune / ♥clear\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥dev / ♥developer / ♥entwickler\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
+        MessageSender.sendMessage("```HELP\n♥help / ♥hilfe\n♥prune / ♥clear\n♥giverole <RoleName> <@Users> / gvrle\n♥removerole <RoleName> <@Users> / takerole / tkrle / rmrle\n♥botworking\n♥time / ♥zeit\n♥date / ♥datum\n♥weekday / ♥wochentag\n♥settimezone <timeZone>\n♥say <text> / ♥sag <text>\n♥dev / ♥developer / ♥entwickler\n♥invlink / ♥invitelink\n♥invlinktesting / ♥invitelinktesting\n♥koala\n♥git\n```", channel);
     }
     public static void testCommand(IChannel channel) throws RateLimitException, DiscordException, MissingPermissionsException {
         ZoneId zone = ZoneId.of("UTC+1");
@@ -163,7 +163,11 @@ public class Commands {
     }
 
     public static void giveRoleCommand(ArrayList<String> args, IMessage message) {
-        if (args.size() < 3) {
+        if(!(ClientManager.getClientInstance().getOurUser().getPermissionsForGuild(message.getGuild()).contains(Permissions.MANAGE_ROLES))){
+            MessageSender.sendMessage("I need the permission to manage roles for this command to work.", message.getChannel());
+            return;
+        }
+        if(args.size() < 3) {
             MessageSender.sendMessage("Use this command like this: ♥giverole <role> <@user>", message.getChannel());
             return;
         }
@@ -183,6 +187,34 @@ public class Commands {
         IRole role = roles.get(0);
         for(int i = 0; i < mentions.size(); i++){
             mentions.get(i).addRole(role);
+        }
+    }
+
+    public static void removeRoleCommand(ArrayList<String> args, IMessage message) {
+        if(!(ClientManager.getClientInstance().getOurUser().getPermissionsForGuild(message.getGuild()).contains(Permissions.MANAGE_ROLES))){
+            MessageSender.sendMessage("I need the permission to manage roles for this command to work.", message.getChannel());
+            return;
+        }
+        if(args.size() < 3) {
+            MessageSender.sendMessage("Use this command like this: ♥removerole <role> <@user>", message.getChannel());
+            return;
+        }
+        if(!(message.getAuthor().getRolesForGuild(message.getGuild()).contains(message.getGuild().getRolesByName("PhostBotAdmin").get(0)) || message.getAuthor().getID().equals(ClientManager.getBotAdminID()))){
+            MessageSender.sendMessage("You need PhostBotAdmin to do that!", message.getChannel());
+            return;
+        }
+        List<IUser> mentions = message.getMentions();
+        if (mentions.size() <= 0) {
+            MessageSender.sendMessage("You need to mention the person you want to remove the role of", message.getChannel());
+        }
+        List<IRole> roles = message.getGuild().getRolesByName(args.get(1));
+        if (roles.size() != 1){
+            MessageSender.sendMessage("There are multiple or no roles with that name!", message.getChannel());
+            return;
+        }
+        IRole role = roles.get(0);
+        for(int i = 0; i < mentions.size(); i++){
+            mentions.get(i).removeRole(role);
         }
     }
 }
