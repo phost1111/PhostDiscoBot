@@ -1,9 +1,7 @@
 package commands;
 
 import client.ClientManager;
-import sx.blah.discord.handle.obj.IChannel;
-import sx.blah.discord.handle.obj.IGuild;
-import sx.blah.discord.handle.obj.IMessage;
+import sx.blah.discord.handle.obj.*;
 import sx.blah.discord.util.*;
 import utils.FileManager;
 import utils.MessageSender;
@@ -93,10 +91,6 @@ public class Commands {
         MessageSender.sendMessage("Send a PM to this guy: " + ClientManager.getClientInstance().getUserByID("139354514091147264").mention(), channel);
     }
     public static void pruneCommand(IMessage message, String Samount) throws RateLimitException, DiscordException, MissingPermissionsException, IOException {
-        if(message.getGuild().getRolesByName("PhostBotAdmin").size() <= 0){
-            MessageSender.sendMessage("There is no PhostBotAdmin role on this server. You need this role to use admin commands", message.getChannel());
-            return;
-        }
         if(message.getAuthor().getRolesForGuild(message.getGuild()).contains(message.getGuild().getRolesByName("PhostBotAdmin").get(0)) || message.getAuthor().getID().equals(ClientManager.getBotAdminID())) {
             int amount = 0;
             try {
@@ -166,5 +160,29 @@ public class Commands {
             output += lines.get(i - 1) + "\n";
         }
         MessageSender.sendMessage(output, message.getChannel());
+    }
+
+    public static void giveRoleCommand(ArrayList<String> args, IMessage message) {
+        if (args.size() < 3) {
+            MessageSender.sendMessage("Use this command like this: ♥giverole <role> <@user>", message.getChannel());
+            return;
+        }
+        if(!(message.getAuthor().getRolesForGuild(message.getGuild()).contains(message.getGuild().getRolesByName("PhostBotAdmin").get(0)) || message.getAuthor().getID().equals(ClientManager.getBotAdminID()))){
+            MessageSender.sendMessage("You need PhostBotAdmin to do that!", message.getChannel());
+            return;
+        }
+        List<IUser> mentions = message.getMentions();
+        if (mentions.size() <= 0) {
+            MessageSender.sendMessage("You need to mention the person you want to assign the role to", message.getChannel());
+        }
+        List<IRole> roles = message.getGuild().getRolesByName(args.get(1));
+        if (roles.size() != 1){
+            MessageSender.sendMessage("There are multiple or no roles with that name!", message.getChannel());
+            return;
+        }
+        IRole role = roles.get(0);
+        for(int i = 0; i < mentions.size(); i++){
+            mentions.get(i).addRole(role);
+        }
     }
 }

@@ -21,9 +21,16 @@ public class CommandManager {
         ArrayList<String> tempCharList = new ArrayList<String>();
         String temp = null;
         int i = 0;
+        boolean guildHasAdminRole;
         Scanner scanner = new Scanner(command);
         while(scanner.hasNext()){
             args.add(scanner.next());
+        }
+        if(message.getGuild().getRolesByName("PhostBotAdmin").size() <= 0){
+            MessageSender.sendMessage("There is no PhostBotAdmin role on this server. You need this role to use admin commands", message.getChannel());
+            guildHasAdminRole = false;
+        }else{
+            guildHasAdminRole = true;
         }
         if(args.get(0).equals("botworking")){
             Commands.botWorkingCommand(message.getChannel());
@@ -93,6 +100,8 @@ public class CommandManager {
             return;
         }
         if(args.get(0).equals("prune") || args.get(0).equals("clear")){
+            if(!guildHasAdminRole)
+                return;
             if(args.size() > 1)
                 Commands.pruneCommand(message, args.get(1));
             else
@@ -105,6 +114,12 @@ public class CommandManager {
         }
         if(args.get(0).equals("tttread")){
             Commands.tttReadCommand(args.get(1), message);
+            return;
+        }
+        if(args.get(0).equals("giverole")){
+            if(!guildHasAdminRole)
+                return;
+            Commands.giveRoleCommand(args, message);
             return;
         }
 
