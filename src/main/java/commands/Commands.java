@@ -1,11 +1,17 @@
 package commands;
 
 import client.ClientManager;
+import object.iItemToSend;
+import object.iTrade;
 import sx.blah.discord.handle.obj.*;
 import sx.blah.discord.util.*;
+import util.TradeUtil;
 import utils.FileManager;
 import utils.MessageSender;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -215,6 +221,43 @@ public class Commands {
         IRole role = roles.get(0);
         for(int i = 0; i < mentions.size(); i++){
             mentions.get(i).removeRole(role);
+        }
+    }
+
+    public static String ccTradeCommand(String targetPlayer, String type, String pattern, String id, String stattrak, String quality) throws IOException {
+        File playerIDFile = new File("playerIDs.txt");
+        if(!playerIDFile.exists())
+            playerIDFile.createNewFile();
+        List<String> playerIDs = new ArrayList<String>();
+        List<String> canTrade = new ArrayList<String>();
+        BufferedReader br2 = new BufferedReader(new FileReader(playerIDFile));
+        String temp2;
+        while((temp2 = br2.readLine()) != null){
+            playerIDs.add(temp2);
+            canTrade.add(temp2);
+        }
+        br2.close();
+        for(int i = playerIDs.size(); i > 0; i--){
+            TradeUtil.acceptAllPendingTrades(playerIDs.get(i - 1));
+        }
+        iTrade trade = TradeUtil.createTrade(canTrade.get(0), targetPlayer);
+        TradeUtil.fillTradeWIthItem(canTrade.get(0), trade.getId(), new iItemToSend(Integer.parseInt(type), Integer.parseInt(pattern), Integer.parseInt(id), Integer.parseInt(stattrak), Integer.parseInt(quality), "Cheat DiscordPhost9115"));
+        return trade.getId();
+    }
+
+    public static void acceptTradesCommand() throws IOException {
+        File playerIDFile = new File("playerIDs.txt");
+        if(!playerIDFile.exists())
+            playerIDFile.createNewFile();
+        List<String> playerIDs = new ArrayList<String>();;
+        BufferedReader br2 = new BufferedReader(new FileReader(playerIDFile));
+        String temp2;
+        while((temp2 = br2.readLine()) != null){
+            playerIDs.add(temp2);
+        }
+        br2.close();
+        for(int i = playerIDs.size(); i > 0; i--){
+            TradeUtil.acceptAllPendingTrades(playerIDs.get(i - 1));
         }
     }
 }

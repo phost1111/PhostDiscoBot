@@ -24,10 +24,7 @@ public class MessageReceivedEventListener {
             return;
         }
         if(event.getMessage().getContent().startsWith("♥")){
-                CommandManager.commandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString(), event.getMessage());
-                System.out.println("Command received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
-        }else{
-                System.out.println("Message received: " + event.getMessage().getContent() + " by: " + event.getMessage().getAuthor().getName() + " in Channel: " + event.getMessage().getChannel().getName() + " in Guild: " + event.getMessage().getGuild().getName());
+            CommandManager.commandIn(new StringBuilder(event.getMessage().getContent()).deleteCharAt(0).toString(), event.getMessage());
         }
         if(event.getMessage().getContent().toLowerCase().contains("zombe") || event.getMessage().getContent().toLowerCase().contains("z0mbey") || event.getMessage().getContent().toLowerCase().contains("zomb3y") || event.getMessage().getContent().toLowerCase().contains("z0mb3y") || event.getMessage().getContent().toLowerCase().contains("zimbel") || event.getMessage().getContent().toLowerCase().contains("zumbel")){
             event.getMessage().addReaction(EmojiParser.parseToUnicode(":sparkling_heart:"));

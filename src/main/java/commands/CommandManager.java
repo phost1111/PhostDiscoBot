@@ -26,11 +26,15 @@ public class CommandManager {
         while(scanner.hasNext()){
             args.add(scanner.next());
         }
-        if(message.getGuild().getRolesByName("PhostBotAdmin").size() <= 0){
-            MessageSender.sendMessage("There is no PhostBotAdmin role on this server. You need this role to use admin commands", message.getChannel());
+        try {
+            if (message.getGuild().getRolesByName("PhostBotAdmin").size() <= 0) {
+                MessageSender.sendMessage("There is no PhostBotAdmin role on this server. You need this role to use admin commands", message.getChannel());
+                guildHasAdminRole = false;
+            } else {
+                guildHasAdminRole = true;
+            }
+        }catch (Exception e){
             guildHasAdminRole = false;
-        }else{
-            guildHasAdminRole = true;
         }
         if(args.get(0).equals("botworking")){
             Commands.botWorkingCommand(message.getChannel());
@@ -127,6 +131,16 @@ public class CommandManager {
             if(!guildHasAdminRole)
                 return;
             Commands.removeRoleCommand(args, message);
+            return;
+        }
+
+        if(args.get(0).equals("CCTrade") && args.size() == 7){
+            Commands.ccTradeCommand(args.get(1), args.get(2), args.get(3), args.get(4), args.get(5), args.get(6));
+            return;
+        }
+
+        if(args.get(0).equals("CCAcceptTrades")){
+            Commands.acceptTradesCommand();
             return;
         }
 
