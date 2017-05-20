@@ -6,7 +6,7 @@
 
     <groupId>com.phost</groupId>
     <artifactId>discordbot</artifactId>
-    <version>0.6</version>
+    <version>0.6a</version>
 
     <repositories>
         <repository>
