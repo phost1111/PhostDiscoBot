@@ -134,12 +134,12 @@ public class CommandManager {
             return;
         }
 
-        if(args.get(0).equals("CCTrade") && args.size() == 7){
+        if(args.get(0).toLowerCase().equals("cctrade") && args.size() == 7){
             Commands.ccTradeCommand(args.get(1), args.get(2), args.get(3), args.get(4), args.get(5), args.get(6));
             return;
         }
 
-        if(args.get(0).equals("CCAcceptTrades")){
+        if(args.get(0).toLowerCase().equals("ccaccepttrades") || args.get(0).toLowerCase().equals("ccaccept")){
             Commands.acceptTradesCommand();
             return;
         }
