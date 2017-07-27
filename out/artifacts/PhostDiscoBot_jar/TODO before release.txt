@@ -1,0 +1,4 @@
+1. Change Version in pom
+2. Change Version in ClientManager String
+3. Set Developer Mode off in main
+4. delete timeZoneDB.txt
