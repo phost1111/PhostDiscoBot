@@ -1,7 +1,5 @@
 package utils;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -91,5 +89,34 @@ public class FileManager {
         }
         bufferedWriter.write(ID + " " + toWrite);
         bufferedWriter.close();
+    }
+
+    public static ArrayList<String> getFileLinesAsArrayList(File file) throws IOException {
+        if(file == null)
+            file = getAndCreateFile(file.getCanonicalPath());
+        if(!file.exists())
+            file.createNewFile();
+        ArrayList<String> lines = new ArrayList<String>();
+        String temp;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        while((temp = bufferedReader.readLine()) != null){
+            lines.add(temp);
+        }
+        return lines;
+    }
+
+    public static ArrayList<String> getFileLinesAsArrayList(String fileString) throws IOException {
+        File file = getAndCreateFile(fileString);
+        if(file == null)
+            file = getAndCreateFile(file.getCanonicalPath());
+        if(!file.exists())
+            file.createNewFile();
+        ArrayList<String> lines = new ArrayList<String>();
+        String temp;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        while((temp = bufferedReader.readLine()) != null){
+            lines.add(temp);
+        }
+        return lines;
     }
 }
