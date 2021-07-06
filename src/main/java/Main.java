@@ -4,17 +4,28 @@ import client.ClientManager;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 /**
- * Created by Phost on 21.01.2017.
+ * The Main class which starts the Bot
+ *
+ * Created by Phost on 21.01.2017
  */
+public class Main {
 
-
-
-public class main {
+    /**
+     *	Tells the bot if he is in dev-Mode or not
+     */
+    public static boolean devModeEnabled = false;
 
     public static void main(String[] args) throws IOException {
 
-        ClientManager.setDeveloperMode(false);   //THIS TELLS THE BOT WHETHER HE IS IN DEV MODE OR NOT
+	if (args.length > 0) {
+	    if (args[0].toLowerString().equals("-devmode")) {
+		Main.devModeEnabled = true;
+	    }
+	}
+	
+        ClientManager.setDeveloperMode(Main.devModeEnabled);
         System.out.println("Please enter your bot Token");
         ClientManager.newClientInstance(new Scanner(System.in).next(), true);
         ClientManager.newDispatcher();
